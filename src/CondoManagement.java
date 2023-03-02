@@ -136,7 +136,7 @@ public class CondoManagement {
                     input.nextLine();
                     System.out.print("Enter your name : ");
                     String buyerName = input.nextLine();
-                    building[floorBuying - 1][roomBuying - 1] = buyerName.toUpperCase();
+                    building[floorBuying - 1][roomBuying - 1] = buyerName;
                     System.out.println();
 
                     // Message bough
@@ -193,7 +193,7 @@ public class CondoManagement {
                                 for (int i = 0; i < building.length; i++) {
                                     for (int j = 0; j < building[i].length; j++) {
                                         if (building[i][j] != null) {
-                                            if (building[i][j].equals(owner.toUpperCase())) {
+                                            if (building[i][j].toLowerCase().equals(owner.toLowerCase())) {
                                                 searchResult += "\tfloor: " + (i + 1) + ", room: " + (j + 1)+"\n";
                                             }
                                         }

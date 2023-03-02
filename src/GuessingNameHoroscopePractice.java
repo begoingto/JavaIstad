@@ -23,6 +23,13 @@ public class GuessingNameHoroscopePractice {
             };
         }
 
+        while (String.valueOf(sum).length() > 1)
+        {
+            int remain = sum % 10;
+            int result = sum / 10;
+            sum = remain + result;
+        }
+
         System.out.println("Sum = "+ sum);
     }
 }
