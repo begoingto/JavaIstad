@@ -194,7 +194,7 @@ public class CondoManagement {
                                     for (int j = 0; j < building[i].length; j++) {
                                         if (building[i][j] != null) {
                                             if (building[i][j].equals(owner.toUpperCase())) {
-                                                searchResult += "floor: " + (i + 1) + ", room: " + (j + 1);
+                                                searchResult += "\tfloor: " + (i + 1) + ", room: " + (j + 1)+"\n";
                                             }
                                         }
                                     }
@@ -203,7 +203,7 @@ public class CondoManagement {
                                 if (searchResult.equals("")) {
                                     System.out.println("Not found owner.");
                                 } else {
-                                    System.out.println("Owner name: " + owner.toUpperCase() + " stay in " + searchResult);
+                                    System.out.println("Owner name: " + owner.toUpperCase() + " stay in :\n" + searchResult);
                                 }
                                 System.out.println(symbol);
                                 System.out.print("Please enter to continue...");
