@@ -1,26 +1,14 @@
-import java.util.Scanner;
-
+import java.time.*; // To import Entire Package
+import java.time.format.DateTimeFormatter; // To import Package Member
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        // Referring to a Package Member by Its Qualified Name
+        java.util.Scanner input = new java.util.Scanner(System.in); // System.in is Java compiler automatically imports
 
-        System.out.print("=> Enter N of Product :");
-        int n = Integer.parseInt(input.nextLine());
-        Product[] products = new Product[n];
-
-        for (int i = 0; i < n; i++) {
-            /**
-                Product p = new Product();
-                p.insert(input);
-                products[i] = p;
-            */
-            products[i] = new Product();
-            products[i].insert(input);
-        }
-
-        for (Product product: products)
-        {
-            product.select();
-        }
+        System.out.print("=> Enter Your Name: ");
+        String name = input.nextLine();
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("Time : "+ now.format(DateTimeFormatter.ofPattern("dd-MMMM-YYYY hh:mm a")));
+        System.out.println("Hello "+ name+ ", nice to meet you.");
     }
 }
