@@ -43,7 +43,7 @@ public class SavingAccount extends Account implements Interest{
 
     @Override
     public Double calculate(Double amount) {
-        return null;
+        return this.interest * amount;
     }
 
     @Override
@@ -52,8 +52,8 @@ public class SavingAccount extends Account implements Interest{
         System.out.println("=> Account Number: "+ super.getNumber());
         System.out.println("=> Account Name: "+ super.getName());
         System.out.println("=> Account Balance: "+ String.format("%1$,.2f", super.getBalance()));
-        System.out.println("=> Interest: "+ this.interest);
-        System.out.println("=> Interest Rate: "+ getBalance());
+        System.out.println("=> Interest Rate: "+ this.interest);
+        System.out.println("=> Total Balance: "+ super.getBalance() + calculate(getBalance()));
         System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 }

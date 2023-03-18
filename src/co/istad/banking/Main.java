@@ -26,8 +26,10 @@ public class Main {
         creditCard.showBalance();
 
 
-        SavingAccount savingAccount = new SavingAccount(111222,"Begoingto",500.0);
-        savingAccount.setInterestI(new RielRate());
+        SavingAccount savingAccount = new SavingAccount(111222,"Begoingto",100.0);
+        if (savingAccount.getNumber().equals(Database.savingAccount().getNumber())){
+            savingAccount = Database.savingAccount();
+        }
         savingAccount.showBalance();
     }
 }
