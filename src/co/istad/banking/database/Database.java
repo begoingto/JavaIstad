@@ -28,7 +28,7 @@ public class Database {
     }
 
     public static SavingAccount savingAccount(){
-        SavingAccount savingAccount = new SavingAccount(111222,"Begoingto",100.0);
+        SavingAccount savingAccount = new SavingAccount(111222,"Begoingto".toUpperCase(),100.0);
         savingAccount.setInterest(0.06);
         return savingAccount;
     }

@@ -50,7 +50,7 @@ public class SavingAccount extends Account implements Interest{
     protected void showBalance() {
         System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$Account information$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         System.out.println("=> Account Number: "+ super.getNumber());
-        System.out.println("=> Account Name: "+ super.getName());
+        System.out.println("=> Account Name: "+ super.getName().toUpperCase());
         System.out.println("=> Account Balance: "+ String.format("%1$,.2f", super.getBalance()));
         System.out.println("=> Interest Rate: "+ this.interest);
         System.out.println("=> Total Balance: "+ (super.getBalance() + calculate(getBalance())));
