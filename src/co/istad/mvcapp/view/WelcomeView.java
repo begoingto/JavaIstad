@@ -55,6 +55,8 @@ public class WelcomeView {
                 case 5 -> System.exit(0);
                 default -> System.out.println("Invalid option..!");
             }
+            System.out.print("Press enter to continue...");
+            input.nextLine();
         }while (true);
 
     }
