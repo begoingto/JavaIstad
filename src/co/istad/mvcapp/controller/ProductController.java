@@ -6,6 +6,8 @@ import co.istad.mvcapp.dto.ProductDto;
 import co.istad.mvcapp.model.Product;
 
 import java.util.List;
+import java.util.UUID;
+
 public class ProductController {
     private final ProductDaoImpl productDao;
 
@@ -19,5 +21,13 @@ public class ProductController {
 
     public ProductDto handleCreateNewProduct(CreateProductDto createProductDto) {
         return productDao.insert(createProductDto);
+    }
+
+    public void removeProduct(UUID id){
+        productDao.remove(id);
+    }
+
+    public void updateProduct(UUID id){
+        productDao.update(id);
     }
 }
