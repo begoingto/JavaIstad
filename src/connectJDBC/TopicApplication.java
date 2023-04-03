@@ -7,6 +7,7 @@ import org.postgresql.jdbc.PgConnection;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class TopicApplication {
@@ -48,8 +49,16 @@ public class TopicApplication {
         this.scanner.nextLine();
         System.out.print("=> Enter ID: ");
         int id = this.scanner.nextInt();
-        Topic topic =  ManageData.selectTopicById(this.connection,id);
-        System.out.println(topic);
+        Topic result =  ManageData.selectTopicById(this.connection,id);
+        if (result==null) {
+            System.out.println("""
+                    ----------------------------
+                    # Error: Product Not found
+                    ----------------------------
+                    """);
+        }else {
+            System.out.println(result);
+        }
         this.pressEnterContinue();
         this.scanner.nextLine();
     }
@@ -59,8 +68,19 @@ public class TopicApplication {
         this.scanner.nextLine();
         System.out.print("=> Enter Name: ");
         String name = this.scanner.nextLine();
-        Topic topic =  ManageData.selectTopicByName(this.connection,name);
-        System.out.println(topic);
+        List<Topic> result =  ManageData.selectTopicByName(this.connection,name);
+        if (result==null) {
+            System.out.println("""
+                    ----------------------------
+                    # Error: Product Not found
+                    ----------------------------
+                    """);
+        }else {
+            System.out.println("************************ Search Result: "+ result.size() +" ************************");
+            for (Topic topic : result) {
+                System.out.println(topic);
+            }
+        }
         this.pressEnterContinue();
         this.scanner.nextLine();
     }
@@ -90,7 +110,14 @@ public class TopicApplication {
         System.out.print("=> Enter Description: ");
         topic.setDescription(this.scanner.nextLine());
         topic.setStatus(true);
-        ManageData.updateTopic(this.connection,topic);
+        Topic result = ManageData.updateTopic(this.connection,topic);
+        if (result==null){
+            System.out.println("""
+                    ----------------------------
+                    # Error: Product Not found
+                    ----------------------------
+                    """);
+        }
         this.pressEnterContinue();
     }
 
@@ -99,7 +126,14 @@ public class TopicApplication {
         this.scanner.nextLine();
         System.out.print("=> Enter ID: ");
         int id = this.scanner.nextInt();
-        ManageData.deleteTopic(this.connection,id);
+        boolean result = ManageData.deleteTopic(this.connection,id);
+        if (!result){
+            System.out.println("""
+                    ----------------------------
+                    # Error: Product Not found
+                    ----------------------------
+                    """);
+        }
         this.pressEnterContinue();
         this.scanner.nextLine();
     }

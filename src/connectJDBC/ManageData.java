@@ -35,7 +35,7 @@ public class ManageData {
                 System.out.println(topic);
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         }
     }
 
@@ -53,11 +53,11 @@ public class ManageData {
                     ****************************************************
                     """);
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         }
     }
 
-    public static void updateTopic(Connection conn, Topic topic){
+    public static Topic updateTopic(Connection conn, Topic topic){
         try{
             String sql = "UPDATE topics SET name=?, description=?,status=? WHERE id="+ topic.getId();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -70,26 +70,31 @@ public class ManageData {
                     * Congratulation 🎉, You are updated successfully. *
                     ****************************************************
                     """);
+            return topic;
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         }
+        return null;
     }
 
-    public static void deleteTopic(Connection conn, Integer id){
+    public static boolean deleteTopic(Connection conn, Integer id){
         try{
             String sql = "DELETE FROM topics WHERE id="+ id;
             PreparedStatement statement = conn.prepareStatement(sql);
             int count = statement.executeUpdate();
-            System.out.println("""
+            if (count==1){
+                System.out.println("""
                     ****************************************************
                     * Congratulation 🎉, You are deleted successfully. *
                     ****************************************************
                     """);
+                return true;
+            }
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         }
+        return false;
     }
-
 
     public static Topic selectTopicById(Connection conn, Integer id){
         try{
@@ -101,30 +106,30 @@ public class ManageData {
                 String name = resultSet.getString("name");
                 String desc = resultSet.getString("description");
                 boolean status = resultSet.getBoolean("status");
-                return new Topic(id,name,desc,status);
+                return new Topic(gid,name,desc,status);
             }
-
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         }
         return null;
     }
 
-    public static Topic selectTopicByName(Connection conn, String name){
+    public static List<Topic> selectTopicByName(Connection conn, String name){
+        List<Topic> topics = new ArrayList<>();
         try{
-            String sql = "SELECT * FROM topics WHERE name ILIKE '%"+ name+"'";
+            String sql = "SELECT * FROM topics WHERE name ILIKE '%"+ name+"%'";
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet resultSet =  statement.executeQuery();
-            if (resultSet.next()){
+            while (resultSet.next()){
                 Integer id = resultSet.getInt("id");
                 String gname = resultSet.getString("name");
                 String desc = resultSet.getString("description");
                 boolean status = resultSet.getBoolean("status");
-                return new Topic(id,gname,desc,status);
+                topics.add(new Topic(id,gname,desc,status));
             }
-
+            return topics;
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("Error: "+e.getMessage());
         }
         return null;
     }
